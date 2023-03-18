@@ -207,6 +207,9 @@ nav ul li a:focus::before{
     }
 
 }
+.notfound{
+    font-size: 50px;
+}
 
 
 
