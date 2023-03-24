@@ -1,14 +1,27 @@
-/* eslint-disable no-unused-vars */
+
 import react,{useEffect, useState} from "react";
 import Carte from "./Carte";
+//On définit ici quelques constantes et variables qui seront utilisées dans notre application
+//API_key contient la clé API fournie par l'API TheMovieDB
+//base_url contient l'URL de base pour toutes les requêtes à l'API 
+//url est l'URL pour récupérer les films les plus populaires au départ
+//arr est un tableau de chaînes contenant les différents types de films que nous pouvons rechercher
 let API_key="&api_key=db95773a7fb212ba790d71f6adac0e7e";
 let base_url="https://api.themoviedb.org/3";
 let url=base_url+"/discover/movie?sort_by=popularity.desc"+API_key;
 let arr=["Populaire","Theatre","Enfants","Drama","Comedie"];
+//composent principal
+//useState pour créer trois états
+//movieData contiendra les données des films récupérées depuis l'API
+//url_set contiendra l'URL de l'API à appeler
+//search contiendra le terme de recherche saisi par l'utilisateur
 const Main=()=>{
     const [movieData,setData]=useState([]);
     const [url_set,setUrl]=useState(url);
-    const [search, setSearch]=useState();
+    const [search, setSearch]=useState(); 
+    //useEffect pour déclencher une requête à l'API chaque fois que url_set est mis à jour
+    // fetch pour récupérer les données de l'API 
+    // setData pour mettre à jour l'état movieData
     useEffect(()=>{
         fetch(url_set).then(res=>res.json()).then(data=>{
             //console.log(data.results);
@@ -34,6 +47,9 @@ const Main=()=>{
         }
         setUrl(url);
     }
+
+    //Cette fonction est appelée lorsqu'un utilisateur appuie sur la touche enter lorsqu'il recherche un film
+    // Elle utilise l'état search pour mettre à jour l'URL de l'API avec la recherche effectuée par l'utilisateur
     const searchMovie=(evt)=>{
         if(evt.key=="Enter")
         {
